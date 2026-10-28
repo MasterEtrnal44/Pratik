@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pratik Gawande Photography | Cinematic Wedding & Portraiture</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = { 
@@ -13,7 +13,8 @@
                 extend: { 
                     fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] },
                     colors: {
-                        brand: { 500: '#8ba3a6', 900: '#1a1d20', 950: '#111315' }
+                        brand: { 500: '#8ba3a6', 900: '#1a1d20', 950: '#111315' },
+                        gold: { 500: '#C6A87C' } // Luxury bronze/gold for the progress bars
                     }
                 } 
             } 
@@ -42,9 +43,15 @@
         ::-webkit-scrollbar-thumb:hover { background: #3a3d40; }
 
         /* Minimalist Input Autocomplete fix */
-        input:-webkit-autofill, select:-webkit-autofill {
+        input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill {
             -webkit-box-shadow: 0 0 0 30px #1a1d20 inset !important;
             -webkit-text-fill-color: white !important;
+        }
+
+        /* Progress Bar Animation */
+        .progress-bar-fill {
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
     </style>
 </head>
@@ -62,7 +69,8 @@
             
             <div class="hidden md:flex items-center space-x-10 text-[10px] font-semibold uppercase tracking-[0.25em] mr-2">
                 <a href="#home" class="text-slate-400 hover:text-white transition duration-300">Home</a>
-                <a href="#portfolio" class="text-slate-400 hover:text-white transition duration-300">Portfolio</a>
+                <a href="#stories" class="text-slate-400 hover:text-white transition duration-300">Stories</a>
+                <a href="#portfolio" class="text-slate-400 hover:text-white transition duration-300">Films</a>
                 <a href="#services" class="text-slate-400 hover:text-white transition duration-300">Experiences</a>
                 <a href="#about" class="text-slate-400 hover:text-white transition duration-300">About</a>
                 <a href="#inquiry" class="text-brand-950 bg-slate-100 px-6 py-2.5 rounded-full hover:bg-white hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all duration-300">Get Quote</a>
@@ -80,14 +88,15 @@
     <div id="mobile-menu" class="hidden fixed top-20 left-4 right-4 z-40 bg-brand-900/95 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden transition-all duration-300">
         <div class="px-6 py-8 space-y-6 text-xs font-semibold uppercase tracking-[0.2em] text-center">
             <a href="#home" class="block text-slate-100 mobile-link">Home</a>
-            <a href="#portfolio" class="block text-slate-400 hover:text-slate-100 mobile-link">Portfolio</a>
+            <a href="#stories" class="block text-slate-400 hover:text-slate-100 mobile-link">Stories</a>
+            <a href="#portfolio" class="block text-slate-400 hover:text-slate-100 mobile-link">Films</a>
             <a href="#services" class="block text-slate-400 hover:text-slate-100 mobile-link">Experiences</a>
             <a href="#about" class="block text-slate-400 hover:text-slate-100 mobile-link">About</a>
             <a href="#inquiry" class="block text-brand-950 bg-slate-100 mx-auto w-3/4 py-3 rounded-full mt-4 mobile-link shadow-lg">Get Quote</a>
         </div>
     </div>
 
-    <!-- 2. Hero Section (Moody, cinematic shot) -->
+    <!-- 2. Hero Section -->
     <header id="home" class="relative h-screen w-full flex items-center justify-center bg-brand-900 overflow-hidden">
         <div class="absolute inset-0 w-full h-full bg-cover bg-center opacity-50 animate-[pulse_20s_ease-in-out_infinite]" 
              style="background-image: url('https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
@@ -96,7 +105,7 @@
         <div class="absolute inset-0 bg-gradient-to-b from-brand-950/70 via-brand-900/40 to-brand-950"></div>
         
         <div class="relative z-10 text-center px-4 max-w-4xl flex flex-col items-center mt-12 reveal">
-            <span class="uppercase tracking-[0.3em] text-[9px] text-slate-300 mb-8 font-semibold border border-slate-500/30 px-6 py-2 rounded-full backdrop-blur-sm shadow-sm">Amravati • India • Global</span>
+            <span class="uppercase tracking-[0.3em] text-[9px] text-slate-300 mb-8 font-semibold border border-slate-500/30 px-6 py-2 rounded-full backdrop-blur-sm shadow-sm">Amravati • Pune • Global</span>
             
             <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-6 leading-tight drop-shadow-2xl">
                 <span class="italic font-light text-slate-200">Cinematic</span> Stories,<br>
@@ -107,7 +116,7 @@
                 We craft unposed, breathtaking visuals for your biggest moments. Experience storytelling that feels as natural as the moment it happened.
             </p>
             
-            <a href="#portfolio" class="group relative inline-flex items-center justify-center px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white border border-white/20 rounded-full backdrop-blur-md hover:bg-white hover:text-brand-950 transition-all duration-500 shadow-xl">
+            <a href="#stories" class="group relative inline-flex items-center justify-center px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white border border-white/20 rounded-full backdrop-blur-md hover:bg-white hover:text-brand-950 transition-all duration-500 shadow-xl">
                 <span class="relative z-10 flex items-center gap-3">
                     View Our Work
                     <svg class="w-4 h-4 transform group-hover:translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
@@ -116,18 +125,43 @@
         </div>
     </header>
 
-    <!-- 3. Portfolio Section -->
-    <section id="portfolio" class="py-24 bg-brand-950">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-20 reveal">
-                <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-4">Our Cinematic Vault</h2>
-                <p class="text-slate-400 font-light max-w-lg mx-auto">Selected stories from our recent couples. Beautifully unposed and entirely real.</p>
+    <!-- 3. Stories Captured (Vertical Photo Gallery using local images) -->
+    <section id="stories" class="py-24 bg-brand-950">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-16 reveal">
+                <h3 class="text-[11px] font-semibold uppercase tracking-[0.4em] text-slate-300 mb-4">Stories Captured</h3>
+                <p class="font-serif text-2xl md:text-3xl text-slate-400 italic font-light">A collection of heartfelt moments,<br>beautifully captured to tell your unique story.</p>
             </div>
 
-            <!-- Weddings Category -->
-            <h3 class="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-8 border-b border-slate-800 pb-3 text-center md:text-left reveal">Weddings</h3>
-            <div class="flex flex-wrap justify-center gap-10 mb-24">
-                <a href="https://www.instagram.com/reel/DcfaaFiovx5/" target="_blank" class="group relative w-full max-w-[340px] h-[580px] rounded-3xl overflow-hidden shadow-[0_20px_40px_rgba(15,15,12,0.8)] block border border-slate-800 bg-brand-900 reveal delay-100">
+            <!-- Single Column Vertical Image Flow -->
+            <div class="flex flex-col gap-12 items-center">
+                <!-- Photo 1 -->
+                <div class="w-full max-w-2xl rounded-3xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.5)] reveal">
+                    <img src="./img1.jpg" alt="Couple portrait" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-1000">
+                </div>
+                <!-- Photo 2 -->
+                <div class="w-full max-w-2xl rounded-3xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.5)] reveal">
+                    <img src="./img2.jpg" alt="Candid laughter" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-1000">
+                </div>
+                <!-- Photo 3 -->
+                <div class="w-full max-w-2xl rounded-3xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.5)] reveal">
+                    <img src="./img3.jpg" alt="Traditional moment" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-1000">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Films / Portfolio Section -->
+    <section id="portfolio" class="py-24 bg-brand-900 border-t border-slate-800/30">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-20 reveal">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-4">Cinematic Films</h2>
+                <p class="text-slate-400 font-light max-w-lg mx-auto">Watch our favorite films. Beautifully unposed and entirely real.</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-10">
+                <!-- Reel 1 -->
+                <a href="https://www.instagram.com/reel/DcfaaFiovx5/" target="_blank" class="group relative w-full max-w-[340px] h-[580px] rounded-3xl overflow-hidden shadow-[0_20px_40px_rgba(15,15,12,0.8)] block border border-slate-800 bg-brand-950 reveal delay-100">
                     <img src="./reel1.jpg" alt="Wedding Cinematic" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-900/20 to-transparent"></div>
                     <div class="absolute inset-0 flex items-center justify-center">
@@ -141,7 +175,8 @@
                     </div>
                 </a>
 
-                <a href="https://www.instagram.com/reel/DaHWbK8R-UP/" target="_blank" class="group relative w-full max-w-[340px] h-[580px] rounded-3xl overflow-hidden shadow-[0_20px_40px_rgba(15,15,12,0.8)] block border border-slate-800 bg-brand-900 reveal delay-200">
+                <!-- Reel 2 -->
+                <a href="https://www.instagram.com/reel/DaHWbK8R-UP/" target="_blank" class="group relative w-full max-w-[340px] h-[580px] rounded-3xl overflow-hidden shadow-[0_20px_40px_rgba(15,15,12,0.8)] block border border-slate-800 bg-brand-950 reveal delay-200">
                     <img src="./reel2.jpg" alt="Grand Entry" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-900/20 to-transparent"></div>
                     <div class="absolute inset-0 flex items-center justify-center">
@@ -155,43 +190,11 @@
                     </div>
                 </a>
             </div>
-
-            <!-- Ring Ceremony Category -->
-            <h3 class="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-8 border-b border-slate-800 pb-3 text-center md:text-left reveal">Ring Ceremony</h3>
-            <div class="flex flex-wrap justify-center gap-10">
-                <a href="https://www.instagram.com/reel/DaKPBmtRNHU/" target="_blank" class="group relative w-full max-w-[340px] h-[580px] rounded-3xl overflow-hidden shadow-[0_20px_40px_rgba(15,15,12,0.8)] block border border-slate-800 bg-brand-900 reveal delay-100">
-                    <img src="./reel3.jpg" alt="Akhilesh & Isha" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-900/20 to-transparent"></div>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="w-16 h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 group-hover:bg-white group-hover:scale-110 transition-all duration-500 shadow-2xl">
-                            <svg class="w-6 h-6 text-white group-hover:text-brand-900 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-8 left-8 right-8 text-center">
-                        <p class="text-slate-100 font-serif text-2xl mb-2 drop-shadow-md">Akhilesh & Isha</p>
-                        <p class="text-slate-300 text-[9px] font-semibold uppercase tracking-[0.2em]">Watch Film</p>
-                    </div>
-                </a>
-
-                <a href="https://www.instagram.com/reel/Dau292fTUix/" target="_blank" class="group relative w-full max-w-[340px] h-[580px] rounded-3xl overflow-hidden shadow-[0_20px_40px_rgba(15,15,12,0.8)] block border border-slate-800 bg-brand-900 reveal delay-200">
-                    <img src="./reel4.jpg" alt="Banquet Moments" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-900/20 to-transparent"></div>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="w-16 h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 group-hover:bg-white group-hover:scale-110 transition-all duration-500 shadow-2xl">
-                            <svg class="w-6 h-6 text-white group-hover:text-brand-900 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-8 left-8 right-8 text-center">
-                        <p class="text-slate-100 font-serif text-2xl mb-2 drop-shadow-md">Banquet Moments</p>
-                        <p class="text-slate-300 text-[9px] font-semibold uppercase tracking-[0.2em]">Watch Film</p>
-                    </div>
-                </a>
-            </div>
         </div>
     </section>
 
-    <!-- 4. Services Section (Using flawless local images) -->
-    <section id="services" class="py-24 bg-brand-900 border-t border-slate-800/30 relative overflow-hidden">
+    <!-- 5. Services Section -->
+    <section id="services" class="py-24 bg-brand-950 border-t border-slate-800/30 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 relative z-10">
             <div class="text-center mb-20 reveal">
                 <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-4">Our Experiences</h2>
@@ -200,7 +203,6 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14">
                 
-                <!-- The Traditional Wedding Card -->
                 <div class="group relative overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_20px_40px_rgba(10,10,10,0.6)] reveal delay-100 flex flex-col justify-end min-h-[500px] p-8 md:p-10">
                     <img src="./reel2.jpg" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700 z-0">
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-950/80 to-transparent z-10"></div>
@@ -211,7 +213,6 @@
                     </div>
                 </div>
 
-                <!-- Destination Wedding Card (Kept Unsplash as requested) -->
                 <div class="group relative overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_20px_40px_rgba(10,10,10,0.6)] reveal delay-200 flex flex-col justify-end min-h-[500px] p-8 md:p-10 md:mt-12">
                     <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700 z-0">
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-950/80 to-transparent z-10"></div>
@@ -222,7 +223,6 @@
                     </div>
                 </div>
 
-                <!-- Pre-Wedding Story Card -->
                 <div class="group relative overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_20px_40px_rgba(10,10,10,0.6)] reveal delay-100 flex flex-col justify-end min-h-[500px] p-8 md:p-10">
                     <img src="./reel3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700 z-0">
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-950/80 to-transparent z-10"></div>
@@ -233,7 +233,6 @@
                     </div>
                 </div>
 
-                <!-- Ring Ceremony / Pre-Festivities Card -->
                 <div class="group relative overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_20px_40px_rgba(10,10,10,0.6)] reveal delay-200 flex flex-col justify-end min-h-[500px] p-8 md:p-10 md:mt-12">
                     <img src="./reel4.jpg" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700 z-0">
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-950/80 to-transparent z-10"></div>
@@ -247,76 +246,148 @@
         </div>
     </section>
 
-    <!-- 5. About Section -->
-    <section id="about" class="py-24 bg-brand-950 border-t border-slate-800/30">
+    <!-- 6. About & Milestones Section -->
+    <section id="about" class="py-24 bg-brand-900 border-t border-slate-800/30">
         <div class="max-w-6xl mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center gap-16">
-                <div class="w-full md:w-1/2 reveal">
+            
+            <!-- Bio Split Layout -->
+            <div class="flex flex-col md:flex-row items-center gap-16 mb-24">
+                <div class="w-full md:w-5/12 reveal">
                     <div class="aspect-[4/5] rounded-[2rem] overflow-hidden border border-slate-800 shadow-2xl relative group">
                         <div class="absolute inset-0 bg-brand-900/10 z-10 group-hover:bg-transparent transition-all duration-500"></div>
                         <img src="IMG_1261.JPG.jpg" alt="Pratik Gawande" class="w-full h-full object-cover relative z-0 transform group-hover:scale-105 transition-transform duration-700">
                     </div>
                 </div>
-                <div class="w-full md:w-1/2 reveal delay-200">
+                
+                <div class="w-full md:w-7/12 reveal delay-200">
                     <h3 class="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-4">The Artist</h3>
                     <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">Pratik Gawande</h2>
+                    
                     <p class="text-slate-300 mb-5 leading-relaxed font-light">
-                        Shooting professionally since 2020, I have spent over six years mastering the art of cinematic, timeless, and unposed storytelling. Based in Amravati, I believe the best photographs are the ones you didn't know were being taken.
+                        Pratik Gawande Photography PGP is a Amravti & Pune-based wedding and pre-wedding photography firm, passionate about capturing love stories in their most authentic and beautiful form.
+                    </p>
+                    <p class="text-slate-400 mb-5 leading-relaxed font-light">
+                        With years of experience behind the lens, we specialize in documenting the magic of weddings - from the grandest rituals to the quietest, most intimate moments. Whether it's a vibrant pre-wedding shoot, a traditional ceremony, or a dreamy destination wedding, our goal is to create timeless memories that speak of love, emotion, and celebration. Our approach blends candid storytelling with artistic composition, ensuring every frame reflects the unique essence of each couple. Though rooted in Pune, our work knows no boundaries.
                     </p>
                     <p class="text-slate-400 mb-10 leading-relaxed font-light">
-                        My approach strips away the stiff, traditional poses. Instead, I focus on the raw emotions, the laughter, and the fleeting moments that make your event uniquely yours. Whether it is a grand destination wedding or a quiet maternity shoot, I am there to deliver a premium visual narrative you will cherish forever.
+                        We travel across cities and countries to be part of love stories that deserve to be told with heart and honesty. At Pratik Gawande Photography PGP, we don't just take pictures - we freeze emotions, laughter, tears, and joy that last a lifetime. Let us be a part of your big day, and we'll make sure every click tells a story worth cherishing forever.
                     </p>
-                    <a href="#inquiry" class="inline-flex items-center text-[10px] font-semibold uppercase tracking-widest text-white border-b border-slate-500 hover:border-white pb-1 transition-all duration-300">
-                        Work With Me
-                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    </a>
+                </div>
+            </div>
+
+            <!-- Animated Milestone Stats (The Review System) -->
+            <div class="max-w-3xl mx-auto bg-brand-950 p-10 md:p-14 rounded-[2rem] border border-slate-800 shadow-2xl reveal mb-24">
+                
+                <!-- Stat 1 -->
+                <div class="mb-10 progress-container">
+                    <h4 class="font-serif text-3xl md:text-4xl text-gold-500 mb-2">500+</h4>
+                    <p class="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-400 mb-4">Weddings</p>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                        <div class="bg-gold-500 h-full rounded-full progress-bar-fill" data-width="85%"></div>
+                    </div>
+                </div>
+
+                <!-- Stat 2 -->
+                <div class="mb-10 progress-container">
+                    <h4 class="font-serif text-3xl md:text-4xl text-gold-500 mb-2">1M+</h4>
+                    <p class="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-400 mb-4">Photos Captured</p>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                        <div class="bg-gold-500 h-full rounded-full progress-bar-fill" data-width="95%"></div>
+                    </div>
+                </div>
+
+                <!-- Stat 3 -->
+                <div class="progress-container">
+                    <h4 class="font-serif text-3xl md:text-4xl text-gold-500 mb-2">6+</h4>
+                    <p class="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-400 mb-4">Years Experience</p>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                        <div class="bg-gold-500 h-full rounded-full progress-bar-fill" data-width="70%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Follow Me On Instagram Block -->
+            <div class="text-center pt-8 reveal">
+                <h3 class="font-serif text-3xl md:text-4xl text-white mb-3 tracking-wider uppercase">Follow Me On Instagram</h3>
+                <a href="https://www.instagram.com/pratik_gawande_photography" target="_blank" class="text-slate-400 italic font-serif text-lg hover:text-white transition-colors">@pratik_gawande_photography</a>
+                
+                <div class="mt-12">
+                    <h4 class="text-[10px] font-semibold uppercase tracking-[0.4em] text-slate-500 mb-6">Follow</h4>
+                    <div class="flex justify-center gap-8 border-b border-slate-800 pb-12 w-48 mx-auto">
+                        <a href="https://www.instagram.com/pratik_gawande_photography" target="_blank" class="text-slate-400 hover:text-white transform hover:scale-110 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                        <a href="#" target="_blank" class="text-slate-400 hover:text-white transform hover:scale-110 transition-all duration-300">
+                            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                        </a>
+                        <a href="https://wa.me/919021841052" target="_blank" class="text-slate-400 hover:text-white transform hover:scale-110 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                        </a>
+                    </div>
+                    <p class="mt-4 text-xs text-slate-500 hover:text-white transition-colors cursor-pointer">pratikgawande@gmail.com</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 6. Inquiry Section (Sleek Minimalist Form) -->
+    <!-- 7. Inquiry Section -->
     <section id="inquiry" class="py-24 bg-brand-900 border-t border-slate-800/30">
-        <div class="max-w-3xl mx-auto px-4">
+        <div class="max-w-4xl mx-auto px-4">
             <div class="text-center mb-16 reveal">
-                <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-4">Let's Create Together</h2>
-                <p class="text-slate-400 font-light max-w-lg mx-auto">Skip the inbox. Share your details to receive a custom quote instantly on WhatsApp directly from Pratik.</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-4">Get in Touch</h2>
+                <p class="text-slate-400 font-light max-w-lg mx-auto">Share your details and vision to receive a custom quote instantly on WhatsApp directly from Pratik.</p>
             </div>
 
-            <form id="inquiryForm" class="space-y-8 reveal delay-100 px-4 md:px-0">
+            <form id="inquiryForm" class="space-y-10 reveal delay-100 px-4 md:px-12">
+                <!-- Row 1: Name & Email -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
                     <div class="relative group">
                         <input type="text" id="name" required placeholder="Full Name" class="w-full bg-transparent border-b border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-white transition-colors py-3 text-sm rounded-none">
                     </div>
                     <div class="relative group">
-                        <input type="tel" id="phone" required placeholder="WhatsApp Number" class="w-full bg-transparent border-b border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-white transition-colors py-3 text-sm rounded-none">
+                        <input type="email" id="email" required placeholder="Email Address" class="w-full bg-transparent border-b border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-white transition-colors py-3 text-sm rounded-none">
                     </div>
                 </div>
+                
+                <!-- Row 2: Phone & Date -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+                    <div class="relative group">
+                        <input type="tel" id="phone" required placeholder="Phone Number" class="w-full bg-transparent border-b border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-white transition-colors py-3 text-sm rounded-none">
+                    </div>
                     <div class="relative group">
                         <label class="absolute -top-4 left-0 text-[9px] uppercase tracking-widest text-slate-500">Event Date</label>
                         <input type="date" id="date" required class="w-full bg-transparent border-b border-slate-700 text-white focus:outline-none focus:border-white transition-colors py-3 text-sm rounded-none mt-2" style="color-scheme: dark;">
                     </div>
+                </div>
+
+                <!-- Row 3: Type & Location -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+                    <div class="relative group pt-2">
+                        <select id="type" class="w-full bg-transparent border-b border-slate-700 text-white focus:outline-none focus:border-white transition-colors py-3 text-sm rounded-none appearance-none cursor-pointer">
+                            <option value="" disabled selected class="text-slate-500">Select Event Type</option>
+                            <option value="Wedding" class="bg-brand-900 text-white">Wedding</option>
+                            <option value="Destination Wedding" class="bg-brand-900 text-white">Destination Wedding</option>
+                            <option value="Pre-Wedding Shoot" class="bg-brand-900 text-white">Pre-Wedding Shoot</option>
+                            <option value="Ring Ceremony" class="bg-brand-900 text-white">Ring Ceremony</option>
+                            <option value="Mehandi & Sangeet" class="bg-brand-900 text-white">Mehandi / Sangeet</option>
+                            <option value="Maternity Shoot" class="bg-brand-900 text-white">Maternity Shoot</option>
+                            <option value="Other" class="bg-brand-900 text-white">Other Event</option>
+                        </select>
+                    </div>
                     <div class="relative group flex items-end">
-                        <input type="text" id="location" required placeholder="Event Location (e.g. Amravati)" class="w-full bg-transparent border-b border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-white transition-colors py-3 text-sm rounded-none">
+                        <input type="text" id="location" required placeholder="Event Location (e.g. Pune / Amravati)" class="w-full bg-transparent border-b border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-white transition-colors py-3 text-sm rounded-none">
                     </div>
                 </div>
+
+                <!-- Row 4: Message -->
                 <div class="relative group pt-4">
-                    <select id="type" class="w-full bg-transparent border-b border-slate-700 text-white focus:outline-none focus:border-white transition-colors py-3 text-sm rounded-none appearance-none cursor-pointer">
-                        <option value="" disabled selected class="text-slate-500">Select Event Type...</option>
-                        <option value="Wedding" class="bg-brand-900 text-white">Wedding</option>
-                        <option value="Destination Wedding" class="bg-brand-900 text-white">Destination Wedding</option>
-                        <option value="Pre-Wedding Shoot" class="bg-brand-900 text-white">Pre-Wedding Shoot</option>
-                        <option value="Ring Ceremony" class="bg-brand-900 text-white">Ring Ceremony</option>
-                        <option value="Mehandi & Sangeet" class="bg-brand-900 text-white">Mehandi / Sangeet</option>
-                        <option value="Maternity Shoot" class="bg-brand-900 text-white">Maternity Shoot</option>
-                        <option value="Other" class="bg-brand-900 text-white">Other Event</option>
-                    </select>
+                    <textarea id="message" rows="3" required placeholder="Message (Tell us about your vision)" class="w-full bg-transparent border-b border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-white transition-colors py-3 text-sm rounded-none resize-none"></textarea>
                 </div>
                 
+                <!-- Submit Button -->
                 <div class="pt-8 text-center">
-                    <button type="submit" class="bg-slate-100 text-brand-950 font-bold text-xs uppercase tracking-[0.2em] px-12 py-4 rounded-full hover:bg-white hover:shadow-[0_0_30px_rgba(255,255,255,0.25)] transition-all duration-300 transform hover:-translate-y-1">
-                        Send Inquiry
+                    <button type="submit" class="bg-slate-100 text-brand-950 font-bold text-xs uppercase tracking-[0.2em] px-14 py-4 rounded-full hover:bg-white hover:shadow-[0_0_30px_rgba(255,255,255,0.25)] transition-all duration-300 transform hover:-translate-y-1">
+                        Send Request
                     </button>
                 </div>
             </form>
@@ -329,12 +400,6 @@
             <img src="./logo.jpg" alt="PGP Logo" class="h-10 w-auto rounded-full opacity-50 mb-8 grayscale hover:grayscale-0 transition-all duration-500">
             <p class="text-slate-400 text-sm mb-2 font-light">Shegaon naka, Ashiyad chowk near Bagde Niwas, Amravati</p>
             <p class="text-slate-500 text-[10px] mt-2 uppercase tracking-widest">&copy; 2026 Pratik Gawande Photography. All rights reserved.</p>
-            <div class="mt-8 flex justify-center">
-                <a href="https://www.instagram.com/pratik_gawande_photography" target="_blank" class="text-slate-400 hover:text-white transition-colors text-xs uppercase tracking-widest font-semibold flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                    Follow on Instagram
-                </a>
-            </div>
         </div>
     </footer>
 
@@ -348,31 +413,50 @@
         btn.addEventListener('click', () => menu.classList.toggle('hidden'));
         mobileLinks.forEach(link => link.addEventListener('click', () => menu.classList.add('hidden')));
 
-        // WhatsApp Form Logic
+        // WhatsApp Form Logic (Updated to capture Email and Message)
         document.getElementById('inquiryForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
             const date = document.getElementById('date').value;
-            const location = document.getElementById('location').value;
             const type = document.getElementById('type').value;
+            const location = document.getElementById('location').value;
+            const message = document.getElementById('message').value;
             
-            const text = `Hi Pratik! I'd like to check availability and get a custom quote.%0A%0A*Name:* ${name}%0A*Contact:* ${phone}%0A*Event Date:* ${date}%0A*Location:* ${location}%0A*Event Type:* ${type}`;
+            const text = `Hi Pratik! I'd like to check availability and get a custom quote.%0A%0A*Name:* ${name}%0A*Email:* ${email}%0A*Contact:* ${phone}%0A*Event Date:* ${date}%0A*Location:* ${location}%0A*Event Type:* ${type}%0A*Message:* ${message}`;
             window.open(`https://wa.me/919021841052?text=${text}`, '_blank');
         });
 
-        // Cinematic Scroll Animations
+        // Cinematic Scroll Animations & Progress Bars
         document.addEventListener('DOMContentLoaded', () => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
+                        
+                        // Trigger Progress Bars when they come into view
+                        if (entry.target.classList.contains('progress-container')) {
+                            const bar = entry.target.querySelector('.progress-bar-fill');
+                            if (bar) {
+                                setTimeout(() => {
+                                    bar.style.width = bar.getAttribute('data-width');
+                                }, 300);
+                            }
+                        }
                         observer.unobserve(entry.target); 
                     }
                 });
             }, { threshold: 0.15 });
 
+            // Observe standard reveal elements
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            
+            // Observe progress bar containers
+            document.querySelectorAll('.progress-container').forEach(el => {
+                el.classList.add('reveal');
+                observer.observe(el);
+            });
         });
     </script>
 </body>
